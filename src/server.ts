@@ -7,7 +7,7 @@ const port = 3333;
 app.use(express.json());
 app.use(router);
 
-// configurando a respostas de erro do "express-async-errors"
+// configurando as respostas de erro do "express-async-errors"
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
     // se error for 400 retorne erro se nao retorne mensagem "Error 500"

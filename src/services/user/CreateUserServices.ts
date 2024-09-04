@@ -6,7 +6,7 @@ class CreateUserService {
     async execute({name, email, password}: UserRequest) {
         // se o email for vazio
         if(!email){
-            throw new Error("Email incorreto")
+            throw new Error("Email incorreto!")
         }
 
         // Verificando se o usuario existe
@@ -19,7 +19,7 @@ class CreateUserService {
 
         // verifica se o mail já está sendo usado 
         if(userAlreadyExists){
-            throw new Error("Este email já existe")
+            throw new Error("Este email já existe!")
         }
 
         //Encripitando a senha do usuario
