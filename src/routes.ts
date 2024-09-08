@@ -1,4 +1,6 @@
 import { Router, Request, Response } from "express";
+import multer from "multer";
+import uploadConfig from "./config/multer"
 import { CreateUserController } from "./controllers/user/CreateUserController";
 import { AuthUserController } from "./controllers/user/AuthUseController";
 import { IsAuthenticated } from "./middlewares/isAuthenticated";
@@ -10,6 +12,9 @@ import { ListCategoryController } from "./controllers/category/ListCategoryContr
 import { RemoveCategoryController } from "./controllers/category/RemoveCategoryController";
 
 const router = Router();
+//configurando o upload de imagens
+const upload = multer(uploadConfig.upload("./tmp")); //tmp: criara uma pasta fora de src para armesenar as imagens
+
 router.get("/test", (request: Request, response: Response) => {
   return response.json({ ok: true });
 });
@@ -21,14 +26,14 @@ CreateUserService que vai inserir os dados no banco de dados*/
 router.post("/user", new CreateUserController().handle);
 router.post("/session", new AuthUserController().handle);
 //Utilizando um middleware para apenas usuarios logados possam buscar a informação
-router.get("/me", IsAuthenticated, new DetailUserController().handle) 
-router.delete("/user/remove", new RemoveUserController().hadle)
+router.get("/me", IsAuthenticated, new DetailUserController().handle);
+router.delete("/user/remove", new RemoveUserController().hadle);
 
 
 // Categorias
-router.get("/category/all", IsAuthenticated, new ListCategoryController().handle)
-router.post("/category", IsAuthenticated, new CreateCategoryController().handle)
-router.put("/category/edit", IsAuthenticated, new EditCategoryController().handle)
-router.delete("/category/remove", IsAuthenticated, new RemoveCategoryController().hadle)
+router.get("/category/all", IsAuthenticated, new ListCategoryController().handle);
+router.post("/category", IsAuthenticated, new CreateCategoryController().handle);
+router.put("/category/edit", IsAuthenticated, new EditCategoryController().handle);
+router.delete("/category/remove", IsAuthenticated, new RemoveCategoryController().hadle);
 
 export { router };
