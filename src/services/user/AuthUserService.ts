@@ -34,11 +34,14 @@ class AuthUserService {
 
     // verificando tokem de criptografia da senha
     const token = sign(
+      // 1º Dados que seram validados
       {
         name: user?.name,
         email: user?.email,
       },
-      process.env.JWT_SECRETE as string, //passando o desincriptador do arquivo .env
+      // 2º parametro: chave secret
+      process.env.JWT_SECRET as string, //passando o desincriptador do arquivo .env
+      // 3º 
       {
         subject: user?.id,
         expiresIn: "30d", //apos 30 dias terar que fazer login novamente.
