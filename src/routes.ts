@@ -10,6 +10,8 @@ import { CreateCategoryController } from "./controllers/category/CreateCategoryC
 import { EditCategoryController } from "./controllers/category/EditCategoryController";
 import { ListCategoryController } from "./controllers/category/ListCategoryController";
 import { RemoveCategoryController } from "./controllers/category/RemoveCategoryController";
+import { CreateProductController } from "./controllers/product/CreateProductController";
+import { EditProductController } from "./controllers/product/EditProductController";
 
 const router = Router();
 //configurando o upload de imagens
@@ -35,5 +37,10 @@ router.get("/category/all", IsAuthenticated, new ListCategoryController().handle
 router.post("/category", IsAuthenticated, new CreateCategoryController().handle);
 router.put("/category/edit", IsAuthenticated, new EditCategoryController().handle);
 router.delete("/category/remove", IsAuthenticated, new RemoveCategoryController().hadle);
+
+//Products
+// upload.single("file"): configuração do milter para upload das imagens
+router.post("/product", IsAuthenticated, upload.single("file"), new CreateProductController().handle)
+router.put("/product/edit", IsAuthenticated, upload.single("file"), new EditProductController().handle)
 
 export { router };
