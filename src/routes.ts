@@ -15,6 +15,7 @@ import { EditProductController } from "./controllers/product/EditProductControll
 import { ListProductByCategoryController } from "./controllers/product/ListProductByCategoryController";
 import { ListProductController } from "./controllers/product/ListProductController";
 import { RemoveProductController } from "./controllers/product/RemoveProductController";
+import { SaleProductController } from "./controllers/sale/SaleProductController";
 
 const router = Router();
 //configurando o upload de imagens
@@ -43,11 +44,16 @@ router.delete("/category/remove", IsAuthenticated, new RemoveCategoryController(
 
 //Products
 // upload.single("file"): configuração do milter para upload das imagens
-router.post("/product", IsAuthenticated, upload.single("file"), new CreateProductController().handle)
-router.put("/product/edit", IsAuthenticated, upload.single("file"), new EditProductController().handle)
-router.get("/product/category", IsAuthenticated, new ListProductByCategoryController().handle)
-router.get("/product/list", IsAuthenticated, new ListProductController().handle)
-router.delete("/product/remove", IsAuthenticated, new RemoveProductController().handle)
+router.post("/product", IsAuthenticated, upload.single("file"), new CreateProductController().handle);
+router.put("/product/edit", IsAuthenticated, upload.single("file"), new EditProductController().handle);
+router.get("/product/category", IsAuthenticated, new ListProductByCategoryController().handle);
+router.get("/product/list", IsAuthenticated, new ListProductController().handle);
+router.delete("/product/remove", IsAuthenticated, new RemoveProductController().handle);
+
+//  Sale (vendas)
+router.put("/sale/product", IsAuthenticated, new SaleProductController().handle); //efetuando venda
 
 
+
+///////////////////////////////
 export { router };
