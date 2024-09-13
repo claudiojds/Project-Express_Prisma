@@ -11,8 +11,8 @@ const app = express();
 const port = 3333;
 app.use(express.json());
 app.use(cors());
-app.use("v1",router);
-app.use("/api-doscs", swaggerUI.serve, swaggerUI.setup(swaggerDocument)); 
+app.use("/v1",router);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use("/files", express.static(path.resolve(__dirname, "..", "tmp")))
 
 // configurando as respostas de erro do "express-async-errors"
